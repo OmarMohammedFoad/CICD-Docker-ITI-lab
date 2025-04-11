@@ -27,7 +27,7 @@ jobs:
       with: 
           image: omarfoaudx/itiosnodeapp
           registry: docker.io
-          dockerfile: Dockerfile
+          dockerfile: dockerfile
           username: "${{ secrets.HUB_USERNAME }}"
           password: "${{ secrets.HUB_PASSWORD }}"
           tags: latest  
