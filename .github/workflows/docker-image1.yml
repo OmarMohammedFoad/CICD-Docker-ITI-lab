@@ -1,0 +1,35 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+  deliverit:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+      
+    - name: build docker image and push to hub
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with: 
+          image: omarfoaudx/itiosnodeapp
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: "${{ secrets.HUB_USERNAME }}"
+          password: "${{ secrets.HUB_PASSWORD }}"
+          tags: latest  
+          
+          
